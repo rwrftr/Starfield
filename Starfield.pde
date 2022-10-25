@@ -1,72 +1,85 @@
 
-star alpha;
+star [] alpha = new star[100];
 
 
 void setup()
 {
-  alpha = new star();
   background(9, 1, 48);
   size(1280, 720); 
   //size(500,500);
 
+  for (int i = 0; i < alpha.length; i++) { 
+    alpha[i] = new star();
+  }
 
   //your code here
 }
 
 void mouseClicked() {
 
- setup();
- draw();
- //print("yea");
- 
- 
-   }
+  setup();
+  draw();
+  //print("yea");
+}
 
-  void draw()
-  {
+void draw()
+{
 
-    /*for(int i = 0; i <= 100; i++){
-     
-     alpha.show(i); 
-     background(9, 1, 48);
-     }
-     */
 
-    alpha.show(30);
 
-    //your code here
+  for (int i = 0; i < alpha.length; i++) { 
+    alpha[i].show(30);
+  } 
+
+
+  //your code here
+}
+
+class star
+{
+
+  int myX, myY, mySize, myC;
+  star() {
+
+    myX = (int)(Math.random()*(1260))+10;
+    myY = (int)(Math.random()*(700))+10;
+    myC = color(251, 255, 57, 80);
+    mySize = (int)(Math.random()*5)+5;
   }
 
-  class star
-  {
+  void show(int p) {
 
-    int myX, myY, mySize, myC;
-    star() {
+//this was meant to stop the dots from going in the same spot but now it just does some other stuff which is cool
+/*
+    for (int i = 0; i < alpha.length; i++) {
+      for (int s = 0; s < alpha.length; s++) {
 
-      myX = (int)(Math.random()*(1260))+10;
-      myY = (int)(Math.random()*(700))+10;
-      myC = color(251, 255, 57, 80);
-      mySize = (int)(Math.random()*10)+10;
+        if ((alpha[i].myX == alpha[s].myX)) {
+          alpha[i].myX = (int)(Math.random()*(1260))+10;
+        }
+        if ((alpha[i].myY== alpha[s].myY)) {
+          alpha[i].myY = (int)(Math.random()*(700))+10;
+        }
+      }
     }
-
-    void show(int p) {
-      noStroke();
-      myC = color(251, 255, 57, p);
-      fill(myC);  
-      ellipse(myX, myY, mySize, mySize);
-    }
-
-
-    void blink() {
-    }
+*/
+    noStroke();
+    myC = color(251, 255, 57, p);
+    fill(myC);  
+    ellipse(myX, myY, mySize, mySize);
   }
 
-  class Particle
-  {
-    //your code here
-  }
 
-  class OddballParticle //inherits from Particle
-  {
-    //your code here
+  void blink() {
   }
+}
+
+class Particle
+{
+  //your code here
+}
+
+class OddballParticle //inherits from Particle
+{
+  //your code here
+}
