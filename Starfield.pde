@@ -49,20 +49,20 @@ class star
 
   void show(int p) {
 
-//this was meant to stop the dots from going in the same spot but now it just does some other stuff which is cool
-/*
+    //this was meant to stop the dots from going in the same spot but now it just does some other stuff which is cool
+    /*
     for (int i = 0; i < alpha.length; i++) {
-      for (int s = 0; s < alpha.length; s++) {
-
-        if ((alpha[i].myX == alpha[s].myX)) {
-          alpha[i].myX = (int)(Math.random()*(1260))+10;
-        }
-        if ((alpha[i].myY== alpha[s].myY)) {
-          alpha[i].myY = (int)(Math.random()*(700))+10;
-        }
-      }
-    }
-*/
+     for (int s = 0; s < alpha.length; s++) {
+     
+     if ((alpha[i].myX == alpha[s].myX)) {
+     alpha[i].myX = (int)(Math.random()*(1260))+10;
+     }
+     if ((alpha[i].myY== alpha[s].myY)) {
+     alpha[i].myY = (int)(Math.random()*(700))+10;
+     }
+     }
+     }
+     */
     noStroke();
     myC = color(251, 255, 57, p);
     fill(myC);  
@@ -76,6 +76,18 @@ class star
 
 class Particle
 {
+
+  int PX, PY, PSize, PC, PA;
+
+  Particle() {
+
+    PX = (int)(Math.random()*(1260))+10;
+    PY = (int)(Math.random()*(700))+10;
+    PC = color(251, 255, 57, 80);
+    PSize = (int)(Math.random()*5)+5; 
+    //PA = (2*Math.pi());
+  }
+
   //your code here
 }
 
