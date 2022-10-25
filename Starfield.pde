@@ -85,7 +85,7 @@ class Particle
     PY = (int)(Math.random()*(700))+10;
     PC = color(251, 255, 57, 80);
     PSize = (int)(Math.random()*5)+5; 
-    //PA = (2*Math.pi());
+    //PA = (2*Math.PI());
   }
 
   //your code here
