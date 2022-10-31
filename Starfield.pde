@@ -1,43 +1,49 @@
 
 star [] alpha = new star[100];
 
+Particle [] stuff = new Particle[100];
 
-void setup()
+ void setup()
 {
   background(9, 1, 48);
   size(1280, 720); 
   //size(500,500);
 
+  for (int i = 0; i < 10; i++) { 
+    stuff[i] = new OddballParticle();
+  }
+
+  for (int i = 10; i < stuff.length; i++) { 
+    stuff[i] = new Particle();
+  }
+
   for (int i = 0; i < alpha.length; i++) { 
     alpha[i] = new star();
   }
-
   //your code here
 }
 
 void mouseClicked() {
-
-  setup();
-  draw();
-  //print("yea");
+  //setup();
+  
+for (int i = 0; i < alpha.length; i++) { 
+    stuff[i].PSpeed = Math.random()*5;
+    stuff[i].PSpeed = Math.random()*5;
+  }  
 }
 
 void draw()
 {
-
-
-
+  background(9, 1, 48);
   for (int i = 0; i < alpha.length; i++) { 
     alpha[i].show(30);
-  } 
-
-
-  //your code here
+    stuff[i].move();
+    stuff[i].show();
+  }
 }
 
 class star
 {
-
   int myX, myY, mySize, myC;
   star() {
 
@@ -48,27 +54,20 @@ class star
   }
 
   void show(int p) {
-
-    //this was meant to stop the dots from going in the same spot but now it just does some other stuff which is cool
-    /*
     for (int i = 0; i < alpha.length; i++) {
-     for (int s = 0; s < alpha.length; s++) {
-     
-     if ((alpha[i].myX == alpha[s].myX)) {
-     alpha[i].myX = (int)(Math.random()*(1260))+10;
-     }
-     if ((alpha[i].myY== alpha[s].myY)) {
-     alpha[i].myY = (int)(Math.random()*(700))+10;
-     }
-     }
-     }
-     */
+      for (int s = i+1; s < alpha.length-1; s++) {
+
+        if ((alpha[i].myX == alpha[s].myX) && (alpha[i].myY == alpha[s].myY) ) {
+          alpha[i].myX = (int)(Math.random()*(1260))+10;
+          alpha[i].myY = (int)(Math.random()*(700))+10;
+        }
+      }
+    }
     noStroke();
     myC = color(251, 255, 57, p);
     fill(myC);  
     ellipse(myX, myY, mySize, mySize);
   }
-
 
   void blink() {
   }
@@ -76,22 +75,53 @@ class star
 
 class Particle
 {
+  int PSize, PC;
 
-  int PX, PY, PSize, PC, PA;
+double PAngle, PSpeed, PX, PY;
 
   Particle() {
-
     PX = (int)(Math.random()*(1260))+10;
     PY = (int)(Math.random()*(700))+10;
-    PC = color(251, 255, 57, 80);
+    PC = color(251, 255, 57);
     PSize = (int)(Math.random()*5)+5; 
-    //PA = (2*Math.PI());
+    PAngle = Math.random()*2*Math.PI;
+    PSpeed = Math.random()*5;
   }
 
-  //your code here
-}
+  void move() {
 
-class OddballParticle //inherits from Particle
-{
-  //your code here
+    PX = PX + Math.cos(PAngle) * PSpeed;
+    PY = PY + Math.sin(PAngle) * PSpeed;
+  }
+
+  void show(){
+
+    ellipse((float)PX, (float)PY, PSize, PSize);
+  }
 }
+  class OddballParticle extends Particle
+  {
+    
+    OddballParticle(){
+    
+    PX = (int)(Math.random()*(1260))+10;
+    PY = (int)(Math.random()*(700))+10;
+    PC = color(251, 255, 57);
+    PSize = (int)(Math.random()*5)+5; 
+    PAngle = Math.random()*2*Math.PI;
+    PSpeed = Math.random()*5;
+    
+    }
+    
+    void show(){
+
+    ellipse((float)PX, (float)PY, PSize, PSize);
+  }
+   
+    void move() {
+
+    PX = PX + Math.cos(PAngle) * PSpeed;
+    PY = PY + Math.sin(PAngle) * PSpeed;
+  }
+    
+  }
