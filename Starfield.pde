@@ -1,9 +1,11 @@
 
 star [] alpha = new star[100];
 
-Particle [] stuff = new Particle[100];
+Particle [] stuff = new Particle[50];
 
- void setup()
+Particle test = new Particle();
+
+void setup()
 {
   background(9, 1, 48);
   size(1280, 720); 
@@ -25,11 +27,20 @@ Particle [] stuff = new Particle[100];
 
 void mouseClicked() {
   //setup();
+
+ if (mouseButton == LEFT) {
   
-for (int i = 0; i < alpha.length; i++) { 
-    stuff[i].PSpeed = Math.random()*5;
-    stuff[i].PSpeed = Math.random()*5;
-  }  
+  for (int i = 0; i < stuff.length; i++) { 
+    stuff[i].PSpeed = stuff[i].PSpeed + Math.random()*5;
+    stuff[i].PSpeed = stuff[i].PSpeed + Math.random()*5;
+  }
+ }
+ 
+ if (mouseButton == RIGHT) {for (int i = 0; i < stuff.length; i++) { 
+    stuff[i].PSpeed = stuff[i].PSpeed /2;
+    stuff[i].PSpeed = stuff[i].PSpeed /2;
+  }}
+ 
 }
 
 void draw()
@@ -37,9 +48,15 @@ void draw()
   background(9, 1, 48);
   for (int i = 0; i < alpha.length; i++) { 
     alpha[i].show(30);
+  }
+  
+  for (int i = 0; i < stuff.length; i++) { 
     stuff[i].move();
     stuff[i].show();
   }
+
+  //test.move();
+  //test.show();
 }
 
 class star
@@ -63,6 +80,7 @@ class star
         }
       }
     }
+
     noStroke();
     myC = color(251, 255, 57, p);
     fill(myC);  
@@ -77,7 +95,7 @@ class Particle
 {
   int PSize, PC;
 
-double PAngle, PSpeed, PX, PY;
+  double PAngle, PSpeed, PX, PY;
 
   Particle() {
     PX = (int)(Math.random()*(1260))+10;
@@ -92,36 +110,70 @@ double PAngle, PSpeed, PX, PY;
 
     PX = PX + Math.cos(PAngle) * PSpeed;
     PY = PY + Math.sin(PAngle) * PSpeed;
+
+    if (PX < 0) {
+      PX = 1280;
+    }
+    if (PX > 1280) {
+      PX = 0;
+    }
+    if (PY < 0) {
+      PY = 720;
+    }
+    if (PY > 720) {
+      PY = 0;
+    }
   }
 
-  void show(){
-
+  void show() {
+    fill(PC);
     ellipse((float)PX, (float)PY, PSize, PSize);
   }
 }
-  class OddballParticle extends Particle
-  {
-    
-    OddballParticle(){
-    
+class OddballParticle extends Particle
+{
+
+  double theta = 0;
+  
+  OddballParticle() {
+
     PX = (int)(Math.random()*(1260))+10;
     PY = (int)(Math.random()*(700))+10;
     PC = color(251, 255, 57);
     PSize = (int)(Math.random()*5)+5; 
     PAngle = Math.random()*2*Math.PI;
     PSpeed = Math.random()*5;
-    
-    }
-    
-    void show(){
-
-    ellipse((float)PX, (float)PY, PSize, PSize);
+    theta =  Math.random()*2*Math.PI;
   }
-   
-    void move() {
 
+  void show() {
+
+    fill(142,94,36);
+    ellipse((float)PX, (float)PY, PSize, PSize);
+
+    fill(255);
+    ellipse((float)PX+ (float)(Math.cos(theta)* 20   ), (float)PY + (float)(Math.sin(theta)* 20   ), PSize, PSize);
+  }
+
+  void move() {
+
+    theta += 0.1;
+    if(theta >= (2 * Math.PI)){theta = 0;}
     PX = PX + Math.cos(PAngle) * PSpeed;
     PY = PY + Math.sin(PAngle) * PSpeed;
-  }
+    
+     if (PX < 0) {
+      PX = 1280;
+    }
+    if (PX > 1280) {
+      PX = 0;
+    }
+    if (PY < 0) {
+      PY = 720;
+    }
+    if (PY > 720) {
+      PY = 0;
+    }
     
   }
+}
