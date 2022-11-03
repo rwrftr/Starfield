@@ -32,13 +32,13 @@ void mouseClicked() {
   
   for (int i = 0; i < stuff.length; i++) { 
     stuff[i].PSpeed = stuff[i].PSpeed + Math.random()*5;
-    stuff[i].PSpeed = stuff[i].PSpeed + Math.random()*5;
+    //stuff[i].PSpeed = stuff[i].PSpeed + Math.random()*5;
   }
  }
  
  if (mouseButton == RIGHT) {for (int i = 0; i < stuff.length; i++) { 
     stuff[i].PSpeed = stuff[i].PSpeed /2;
-    stuff[i].PSpeed = stuff[i].PSpeed /2;
+    //stuff[i].PSpeed = stuff[i].PSpeed /2;
   }}
  
 }
@@ -100,7 +100,7 @@ class Particle
   Particle() {
     PX = (int)(Math.random()*(1260))+10;
     PY = (int)(Math.random()*(700))+10;
-    PC = color(251, 255, 57);
+    PC = color(251, 255, 57, 100);
     PSize = (int)(Math.random()*5)+5; 
     PAngle = Math.random()*2*Math.PI;
     PSpeed = Math.random()*5;
@@ -134,13 +134,13 @@ class OddballParticle extends Particle
 {
 
   double theta = 0;
-  
+  int PSize2;
   OddballParticle() {
-
+PSize2 = PSize = (int)(Math.random()*5)+5; 
     PX = (int)(Math.random()*(1260))+10;
     PY = (int)(Math.random()*(700))+10;
     PC = color(251, 255, 57);
-    PSize = (int)(Math.random()*5)+5; 
+    PSize = (int)(Math.random()*8)+10; 
     PAngle = Math.random()*2*Math.PI;
     PSpeed = Math.random()*5;
     theta =  Math.random()*2*Math.PI;
@@ -152,7 +152,7 @@ class OddballParticle extends Particle
     ellipse((float)PX, (float)PY, PSize, PSize);
 
     fill(255);
-    ellipse((float)PX+ (float)(Math.cos(theta)* 20   ), (float)PY + (float)(Math.sin(theta)* 20   ), PSize, PSize);
+    ellipse((float)PX+ (float)(Math.cos(theta)* 20   ), (float)PY + (float)(Math.sin(theta)* 20   ), PSize2, PSize2);
   }
 
   void move() {
